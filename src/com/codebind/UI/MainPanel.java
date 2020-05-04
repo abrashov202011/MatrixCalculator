@@ -10,7 +10,7 @@ public class MainPanel extends JPanel {
      */
     public MainPanel() {
         this.setLayout(new BorderLayout());
-        matrixPanel = new SingleMatrixPanel(4,4);
+        matrixPanel = new SingleMatrixPanel(3,3);
         this.add(matrixPanel, BorderLayout.CENTER);
     }
 }

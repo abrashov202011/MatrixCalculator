@@ -5,7 +5,10 @@ import javax.swing.*;
 public class Matrix {
     float[][] matrix;
     public Matrix(int rows, int columns) {
-
+        matrix = new float[rows][columns];
+    }
+    public Matrix(float[][] matrix) {
+        this.matrix = matrix;
     }
     public  Matrix(JTable table) {
         int rows = table.getRowCount();
@@ -64,4 +67,46 @@ public class Matrix {
         }
         return D;
     }
+    public Matrix inverse()
+    {
+        float[][] inverse = new float[matrix.length][matrix.length];
+        float det = getDeterminant();
+        if (det == 0)
+        {
+            throw new Error("Невозможно вычислить отраиную матрицу для матрицы определитель которой равен 0");
+        }
+        float [][]adj = new float[matrix.length][matrix.length];
+        adjoint(matrix, adj);
+
+        for (int i = 0; i < matrix.length; i++)
+            for (int j = 0; j < matrix.length; j++)
+                inverse[i][j] = adj[i][j]/(float)det;
+
+        return new Matrix(inverse);
+    }
+    static void adjoint(float mat[][],float [][]adj)
+    {
+        int N = mat.length;
+        if (N == 1)
+        {
+            adj[0][0] = 1;
+            return;
+        }
+        int sign = 1;
+        float [][]temp = new float[N][N];
+
+        for (int i = 0; i < N; i++)
+        {
+            for (int j = 0; j < N; j++)
+            {
+                getCofactor(mat, temp, i, j, N);
+                sign = ((i + j) % 2 == 0)? 1: -1;
+                adj[j][i] = (sign)*(determinantOfMatrix(temp, N-1));
+            }
+        }
+    }
+    public float[][] getMatrix(){
+        return  matrix;
+    }
+
 }
