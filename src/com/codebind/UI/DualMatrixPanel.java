@@ -35,7 +35,7 @@ public class DualMatrixPanel extends JPanel {
         //addInverseButton();
         //addTransposeButton();
         //addMatrixSizeFilds(rows, columns);
-
+        addMultiplyButton();
         addSubtractionButton();
         addClearButton();
     }
@@ -79,7 +79,26 @@ public class DualMatrixPanel extends JPanel {
         });
         bottomPanel.add(btn);
     }
-    
+    private void addMultiplyButton() {
+        JButton btn = new JButton("Умножение");
+        btn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (rowsCount1 != rowsCount2 || columnCount1 != columnCount2) {
+                    showWarning("Число столбцов матрицы 1 должно быть равно числу строк матрицы 2");
+                } else {
+                    try {
+                        Matrix matrix1 = new Matrix(matrixTable1.getTable());
+                        Matrix matrix2 = new Matrix(matrixTable2.getTable());
+                        Matrix matrixResult = Matrix.multiply(matrix1, matrix2);
+                        showMatrixResult(matrixResult, "Результат умножения матриц");
+                    } catch (Error ex) {
+                        showWarning(ex.getMessage());
+                    }
+                }
+            }
+        });
+        bottomPanel.add(btn);
+    }
     private void showMatrixResult(Matrix matrix, String title) {
         final JDialog frame = new JDialog((JFrame) SwingUtilities.getWindowAncestor(Main.mainPanel), title, true);
         frame.getContentPane().add(new ResultMatrixPanel(matrix));
