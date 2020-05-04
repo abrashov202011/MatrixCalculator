@@ -128,6 +128,38 @@ public class Matrix {
                 result[i][j] = A[i][j] + B[i][j];
         return new Matrix(result);
     }
+    public static Matrix subtraction(Matrix matrix1, Matrix matrix2)
+    {
+        float[][] A = matrix1.matrix;
+        float[][] B = matrix2.matrix;
+        int rows = A.length;
+        int columns = A[0].length;
+        float[][] result = new float[rows][columns];
+        for (int i = 0; i < rows; i++)
+            for (int j = 0; j < columns; j++)
+                result[i][j] = A[i][j] - B[i][j];
+        return new Matrix(result);
+    }
+    public static Matrix multiply(Matrix matrix1, Matrix matrix2)
+    {
+        float[][] A = matrix1.matrix;
+        float[][] B = matrix2.matrix;
+        int rows1 = A.length;
+        int columns1 = A[0].length;
+        int rows2 = A.length;
+        int columns2 = A[0].length;
+        float[][] result = new float[rows1][columns2];
+        for (int i = 0; i < rows1; i++)
+        {
+            for (int j = 0; j < columns2; j++)
+            {
+                result[i][j] = 0;
+                for (int k = 0; k < columns1; k++)
+                    result[i][j] += A[i][k] * B[k][j];
+            }
+        }
+        return  new Matrix(result);
+    }
     public float[][] getMatrix(){
         return  matrix;
     }
