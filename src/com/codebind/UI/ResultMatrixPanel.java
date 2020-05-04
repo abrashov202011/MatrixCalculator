@@ -12,6 +12,11 @@ public class ResultMatrixPanel extends JPanel {
      */
     public ResultMatrixPanel(Matrix matrix) {
         this.setLayout(new GridLayout());
-        this.add(new MatrixTable(matrix).getTable());
+        ScrollPane scrollPane = new ScrollPane();
+        JTable table = new MatrixTable(matrix).getTable();
+        scrollPane.add(new MatrixTable(matrix).getTable());
+        scrollPane.setMaximumSize(new Dimension(1000,500));
+        scrollPane.setSize(new Dimension(100 * table.getRowCount() ,50 * table.getColumnCount()));
+        this.add(scrollPane);
     }
 }
