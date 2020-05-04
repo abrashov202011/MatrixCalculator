@@ -28,27 +28,28 @@ public class DualMatrixPanel extends JPanel {
         addMatrix(rows1, columns1, rows2,columns2);
         bottomPanel = new JPanel(new GridLayout());
         this.add(bottomPanel,BorderLayout.SOUTH);
-        addDetermimantButton();
+        addAdditionButton();
         //addInverseButton();
         //addTransposeButton();
         //addMatrixSizeFilds(rows, columns);
         addClearButton();
     }
-    private void addDetermimantButton() {
-        JButton btn = new JButton("Определитель");
+    private void addAdditionButton() {
+        JButton btn = new JButton("Сложение");
         btn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-//                if(rowsCount != columnCount) {
-//                    showWarning("Невозможно вычислить определитель у не квадратной матрицы");
-//                } else {
-//                    try {
-//                        Matrix matrix = new Matrix(matrixTable.getTable());
-//                        float determinant = matrix.getDeterminant();
-//                        JOptionPane.showMessageDialog(null, "Определитель равен " + determinant);
-//                    } catch (Error ex) {
-//                        showWarning(ex.getMessage());
-//                    }
-//                }
+                if (rowsCount1 != rowsCount2 || columnCount1 != columnCount2) {
+                    showWarning("Невозможно сложить матрицы разной рамерности");
+                } else {
+                    try {
+                        Matrix matrix1 = new Matrix(matrixTable1.getTable());
+                        Matrix matrix2 = new Matrix(matrixTable2.getTable());
+                        Matrix matrixResult = Matrix.addition(matrix1, matrix2);
+                        showMatrixResult(matrixResult, "Результат сложения матриц");
+                    } catch (Error ex) {
+                        showWarning(ex.getMessage());
+                    }
+                }
             }
         });
         bottomPanel.add(btn);

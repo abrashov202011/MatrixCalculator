@@ -116,7 +116,18 @@ public class Matrix {
         }
         return new Matrix(result);
     }
-
+    public static Matrix addition(Matrix matrix1, Matrix matrix2)
+    {
+        float[][] A = matrix1.matrix;
+        float[][] B = matrix2.matrix;
+        int rows = A.length;
+        int columns = A[0].length;
+        float[][] result = new float[rows][columns];
+        for (int i = 0; i < rows; i++)
+            for (int j = 0; j < columns; j++)
+                result[i][j] = A[i][j] + B[i][j];
+        return new Matrix(result);
+    }
     public float[][] getMatrix(){
         return  matrix;
     }
