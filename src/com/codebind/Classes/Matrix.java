@@ -105,6 +105,18 @@ public class Matrix {
             }
         }
     }
+    public Matrix transpose() {
+        int columns = matrix.length;
+        int rows = matrix[0].length;
+        float[][] result = new float[rows][columns];
+        for (int i = 0; i < columns; i++) {
+            for (int j = 0; j < rows; j++) {
+                result[i][j] = matrix[j][i];
+            }
+        }
+        return new Matrix(result);
+    }
+
     public float[][] getMatrix(){
         return  matrix;
     }

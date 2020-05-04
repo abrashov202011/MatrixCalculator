@@ -20,6 +20,7 @@ public class SingleMatrixPanel extends JPanel {
         this.add(bottomPanel,BorderLayout.SOUTH);
         addDetermimantButton(matrixTable);
         addInverseButton(matrixTable);
+        addTransposeButton(matrixTable);
 
     }
     private void addDetermimantButton(MatrixTable matrixTable) {
@@ -32,7 +33,7 @@ public class SingleMatrixPanel extends JPanel {
                     JOptionPane.showMessageDialog(null,"Определитель равен " + determinant);
                 }
                 catch (Error ex) {
-                    ShowWarning(ex.getMessage());
+                    showWarning(ex.getMessage());
                 }
             }
         });
@@ -45,20 +46,39 @@ public class SingleMatrixPanel extends JPanel {
                 try {
                     Matrix matrix = new Matrix(matrixTable.getTable());
                     Matrix inverseMatrix = matrix.inverse();
-                    final JDialog frame = new JDialog((JFrame) SwingUtilities.getWindowAncestor(Main.mainPanel), "Обращенная матрица", true);
-                    frame.getContentPane().add(new ResultMatrixPanel(inverseMatrix));
-                    frame.setMinimumSize(new Dimension(200,0));
-                    frame.pack();
-                    frame.setVisible(true);
+                    showMatrixResult(matrix.inverse(), "Обращенная матрица");
                 }
                 catch (Error ex) {
-                    ShowWarning(ex.getMessage());
+                    showWarning(ex.getMessage());
                 }
             }
         });
         bottomPanel.add(btn);
     }
-    private void ShowWarning(String message) {
+    private void addTransposeButton(MatrixTable matrixTable) {
+        JButton btn = new JButton("Транспонирование");
+        btn.addActionListener(new ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                try {
+                    Matrix matrix = new Matrix(matrixTable.getTable());
+                    Matrix inverseMatrix = matrix.transpose();
+                    showMatrixResult(matrix.transpose(), "Транспонированна матрица");
+                }
+                catch (Error ex) {
+                    showWarning(ex.getMessage());
+                }
+            }
+        });
+        bottomPanel.add(btn);
+    }
+    private void showMatrixResult(Matrix matrix, String title) {
+        final JDialog frame = new JDialog((JFrame) SwingUtilities.getWindowAncestor(Main.mainPanel), title, true);
+        frame.getContentPane().add(new ResultMatrixPanel(matrix));
+        frame.setMinimumSize(new Dimension(200,0));
+        frame.pack();
+        frame.setVisible(true);
+    }
+    private void showWarning(String message) {
         JOptionPane.showMessageDialog(null,message);
     }
 }
