@@ -207,25 +207,33 @@ public class Matrix {
      * @param matrix2 2 умножаемая матрица
      * @return  возвращает результат умножения 2 матриц
      */
-    public static Matrix multiply(Matrix matrix1, Matrix matrix2)
-    {
-        float[][] A = matrix1.matrix;
-        float[][] B = matrix2.matrix;
-        int rows1 = A.length;
-        int columns1 = A[0].length;
-        int rows2 = A.length;
-        int columns2 = A[0].length;
-        float[][] result = new float[rows1][columns2];
-        for (int i = 0; i < rows1; i++)
-        {
-            for (int j = 0; j < columns2; j++)
-            {
-                result[i][j] = 0;
-                for (int k = 0; k < columns1; k++)
-                    result[i][j] += A[i][k] * B[k][j];
+    public static Matrix multiply(Matrix matrix1, Matrix matrix2) {
+        float[][] firstMatrix = matrix1.matrix;
+        float[][] secondMatrix = matrix2.matrix;
+        float[][] result = new float[firstMatrix.length][secondMatrix[0].length];
+
+        for (int row = 0; row < result.length; row++) {
+            for (int col = 0; col < result[row].length; col++) {
+                result[row][col] = multiplyMatricesCell(firstMatrix, secondMatrix, row, col);
             }
         }
-        return  new Matrix(result);
+
+        return new Matrix(result);
+    }
+    /**
+     * Функция умножения для 1 ячейки
+     * @param firstMatrix 1 умножаемая матрица
+     * @param secondMatrix 2 умножаемая матрица
+     * @param row количество строк
+     * @param col 2 количество столбцов
+     * @return  возвращает результат умножения 2 матриц
+     */
+    private static float multiplyMatricesCell(float[][] firstMatrix, float[][] secondMatrix, int row, int col) {
+        float cell = 0;
+        for (int i = 0; i < secondMatrix.length; i++) {
+            cell += firstMatrix[row][i] * secondMatrix[i][col];
+        }
+        return cell;
     }
     /**
      * Функция возвращает матрицу {@link Matrix#matrix}
