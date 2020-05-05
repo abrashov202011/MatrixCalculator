@@ -105,22 +105,42 @@ public class SingleMatrixPanel extends JPanel {
         JButton btn = new JButton("Применить");
         btn.addActionListener(new ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent e) {
+                try {
+                    Integer.parseInt(columnCount.getText());
+                }
+                catch (Exception ex) {
+                    showWarning("Количество столбцов не является числом");
+                }
+                try {
+                    Integer.parseInt(rowCount.getText());
+                }
+                catch (Exception ex) {
+                    showWarning("Количество строк не является числом");
+                }
                 addMatrix(Integer.parseInt(rowCount.getText()),Integer.parseInt(columnCount.getText()));
             }
         });
         topPanel.add(btn);
     }
     private void addMatrix(int rows, int columns){
-        if(scrollPane != null)
-            this.remove(scrollPane);
-        this.columnCount = columns;
-        this.rowsCount = rows;
-        this.matrixTable = new MatrixTable(rows, columns);
-        this.scrollPane = new ScrollPane();
-        this.add(this.scrollPane);
-        this.scrollPane.add(matrixTable.getTable(), BorderLayout.CENTER);
-        this.revalidate();
-        this.repaint();
+        if(rows <= 0) {
+            showWarning("Количество строк матрицы не меожет быть меньше или равно 0");
+        }
+        else if(columns <= 0) {
+            showWarning("Количество столбцов матрицы не меожет быть меньше или равно 0");
+        }
+        else {
+            if(scrollPane != null)
+                this.remove(scrollPane);
+            this.columnCount = columns;
+            this.rowsCount = rows;
+            this.matrixTable = new MatrixTable(rows, columns);
+            this.scrollPane = new ScrollPane();
+            this.add(this.scrollPane);
+            this.scrollPane.add(matrixTable.getTable(), BorderLayout.CENTER);
+            this.revalidate();
+            this.repaint();
+        }
     }
     private void addClearButton() {
         JButton btn = new JButton("Очистить");
