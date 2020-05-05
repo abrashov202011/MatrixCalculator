@@ -15,7 +15,7 @@ public class Matrix {
         int columns = table.getColumnCount();
         matrix = new float[rows][columns];
         for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < rows; j++) {
+            for (int j = 0; j < columns; j++) {
                 String value = (String)table.getValueAt(i,j);
                 if(value == null || value.isEmpty()) {
                     throw new Error(String.format("Элемент в строке %d и стобце %d не заполнен", i + 1, j + 1));

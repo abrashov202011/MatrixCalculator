@@ -16,7 +16,7 @@ public class ResultMatrixPanel extends JPanel {
         JTable table = new MatrixTable(matrix).getTable();
         scrollPane.add(new MatrixTable(matrix).getTable());
         scrollPane.setMaximumSize(new Dimension(1000,500));
-        scrollPane.setSize(new Dimension(100 * table.getRowCount() ,50 * table.getColumnCount()));
+        scrollPane.setSize(new Dimension(100 * table.getRowCount() ,55 * table.getColumnCount()));
         this.add(scrollPane);
     }
 }

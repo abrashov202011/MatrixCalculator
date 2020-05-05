@@ -37,7 +37,7 @@ public class MatrixTable {
         Object[][] data = new Object[rows][columns];
         DecimalFormat df = new DecimalFormat("#.##");
         for(int i = 0; i < data.length; i++) {
-            for(int j = 0; j < data.length; j++) {
+            for(int j = 0; j < data[0].length; j++) {
                 data[i][j] = df.format(matrix.getMatrix()[i][j]);
             }
         }
