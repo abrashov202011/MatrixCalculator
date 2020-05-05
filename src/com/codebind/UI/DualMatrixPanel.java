@@ -9,14 +9,26 @@ import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+/**
+ * Класс для вывода окна с 2 матрицами
+ * @autor Абрашов
+ * @version 1.0
+ */
 public class DualMatrixPanel extends JPanel {
+    /** Поле для вывода нижней панели с кнопками*/
     JPanel bottomPanel;
+    /** Поле для вывода матрицы 1*/
     SingleMatrixPanel singleMatrixPanel1;
+    /** Поле для вывода матрицы 2*/
     SingleMatrixPanel singleMatrixPanel2;
+    /** Поле для вывода панели с 2 матрицами*/
     JPanel mainMatrixContainer;
     /**
-     * Конструктор - создание нового объекта
+     * Конструктор - создание нового объекта с определенными значениями
+     * @param rows1 количество строк матрицы 1
+     * @param columns1 количество столбцов матрицы 1
+     * @param rows2 количество строк матрицы 2
+     * @param columns2 количество столбцов матрицы 2
      */
     public DualMatrixPanel(int rows1, int columns1, int rows2, int columns2) {
         this.setLayout(new BorderLayout());
@@ -27,6 +39,9 @@ public class DualMatrixPanel extends JPanel {
         addMultiplyButton();
         addSubtractionButton();
     }
+    /**
+     * Функция для добавления кнопки сложения матриц
+     */
     private void addAdditionButton() {
         JButton btn = new JButton("Сложение");
         btn.addActionListener(new ActionListener() {
@@ -56,6 +71,9 @@ public class DualMatrixPanel extends JPanel {
         });
         bottomPanel.add(btn);
     }
+    /**
+     * Функция для добавления кнопки вычитания матриц
+     */
     private void addSubtractionButton() {
         JButton btn = new JButton("Вычитание");
         btn.addActionListener(new ActionListener() {
@@ -85,6 +103,9 @@ public class DualMatrixPanel extends JPanel {
         });
         bottomPanel.add(btn);
     }
+    /**
+     * Функция для добавления кнопки умножения матриц
+     */
     private void addMultiplyButton() {
         JButton btn = new JButton("Умножение");
         btn.addActionListener(new ActionListener() {
@@ -112,6 +133,9 @@ public class DualMatrixPanel extends JPanel {
         });
         bottomPanel.add(btn);
     }
+    /**
+     * Функция для вывода результата операции
+     */
     private void showMatrixResult(Matrix matrix, String title) {
         final JDialog frame = new JDialog((JFrame) SwingUtilities.getWindowAncestor(Main.mainPanel), title, true);
         frame.getContentPane().add(new ResultMatrixPanel(matrix));
@@ -119,6 +143,9 @@ public class DualMatrixPanel extends JPanel {
         frame.pack();
         frame.setVisible(true);
     }
+    /**
+     * Функция для вывода панели с 2 матрицами
+     */
     private void addMatrix(int rows1, int columns1, int rows2, int columns2){
         if(mainMatrixContainer != null)
             this.remove(mainMatrixContainer);
@@ -131,7 +158,9 @@ public class DualMatrixPanel extends JPanel {
         this.revalidate();
         this.repaint();
     }
-
+    /**
+     * Функция для вывода сообщения пользователю
+     */
     private void showWarning(String message) {
         JOptionPane.showMessageDialog(null,message);
     }

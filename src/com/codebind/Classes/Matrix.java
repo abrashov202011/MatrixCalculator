@@ -2,15 +2,33 @@ package com.codebind.Classes;
 
 import javax.swing.*;
 import java.util.Arrays;
-
+/**
+ * Класс для хранения матрицы
+ * @autor Абрашов
+ * @version 1.0
+ */
 public class Matrix {
+    /** Поле в котором хранится матрица */
     float[][] matrix;
+    /**
+     * Конструктор - создание нового объекта определенной размерности
+     * @param rows - количество строк
+     * @param columns - количество столбцов
+     */
     public Matrix(int rows, int columns) {
         matrix = new float[rows][columns];
     }
+    /**
+     * Конструктор - создание нового объекта с определенными значениями
+     * @param matrix - матрица в формате 2 ферного массива
+     */
     public Matrix(float[][] matrix) {
         this.matrix = matrix;
     }
+    /**
+     * Конструктор - создание нового объекта с определенными значениями
+     * @param table - матрица в формате JTable
+     */
     public  Matrix(JTable table) {
         int rows = table.getRowCount();
         int columns = table.getColumnCount();
@@ -31,6 +49,14 @@ public class Matrix {
             }
         }
     }
+    /**
+     * Функция вычисляет алгебраическое дополнение матрицы
+     * @param mat матрица
+     * @param temp алгебраическое дополнение
+     * @param p количество строк
+     * @param q количество столбцов
+     * @param n текущая размерность матрицы
+     */
     static void getCofactor(float mat[][], float temp[][], int p, int q, int n)    {
         int i = 0, j = 0;
         for (int row = 0; row < n; row++)
@@ -49,10 +75,20 @@ public class Matrix {
             }
         }
     }
+    /**
+     * Функция возвращает определитель матрицы {@link Matrix#matrix}
+     * @return  возвращает определитель матрицы {@link Matrix#matrix}
+     */
     public float getDeterminant()
     {
         return determinantOfMatrix(this.matrix, this.matrix.length);
     }
+    /**
+     * Функция рекурсивно вычисляет определитель переданной матрицы
+     * @param mat матрица
+     * @param n текущая размерность матрицы
+     * @return  возвращает определитель переданной матрицы
+     */
     private static float determinantOfMatrix(float mat[][], int n)
     {
         float D = 0;
@@ -68,13 +104,17 @@ public class Matrix {
         }
         return D;
     }
+    /**
+     * Функция возвращает обратную матрицу для матрицы {@link Matrix#matrix}
+     * @return  возвращает обратную матрицу для матрицы {@link Matrix#matrix}
+     */
     public Matrix inverse()
     {
         float[][] inverse = new float[matrix.length][matrix.length];
         float det = getDeterminant();
         if (det == 0)
         {
-            throw new Error("Невозможно вычислить отраиную матрицу для матрицы определитель которой равен 0");
+            throw new Error("Невозможно вычислить обратную матрицу для матрицы определитель которой равен 0");
         }
         float [][]adj = new float[matrix.length][matrix.length];
         adjoint(matrix, adj);
@@ -85,6 +125,11 @@ public class Matrix {
 
         return new Matrix(inverse);
     }
+    /**
+     * Функция вычисляет присоединенную матрицу для переданной матрицы
+     * @param mat матрица
+     * @param adj присоединенная матрица
+     */
     static void adjoint(float mat[][],float [][]adj)
     {
         int N = mat.length;
@@ -106,6 +151,10 @@ public class Matrix {
             }
         }
     }
+    /**
+     * Функция возвращает транспонированну матрицу для матрицы {@link Matrix#matrix}
+     * @return  возвращает транспонированну матрицу для матрицы {@link Matrix#matrix}
+     */
     public Matrix transpose() {
         int columns = matrix.length;
         int rows = matrix[0].length;
@@ -117,6 +166,12 @@ public class Matrix {
         }
         return new Matrix(result);
     }
+    /**
+     * Функция возвращает результат сложения 2 матриц
+     * @param matrix1 1 слагаемая матрица
+     * @param matrix2 2 слагаемая матрица
+     * @return  возвращает результат сложения 2 матриц
+     */
     public static Matrix addition(Matrix matrix1, Matrix matrix2)
     {
         float[][] A = matrix1.matrix;
@@ -129,6 +184,12 @@ public class Matrix {
                 result[i][j] = A[i][j] + B[i][j];
         return new Matrix(result);
     }
+    /**
+     * Функция возвращает результат вычитания 2 матриц
+     * @param matrix1 1 уменьшаемая матрица
+     * @param matrix2 2 вычитаемая матрица
+     * @return  возвращает результат вычитания 2 матриц
+     */
     public static Matrix subtraction(Matrix matrix1, Matrix matrix2)
     {
         float[][] A = matrix1.matrix;
@@ -141,6 +202,12 @@ public class Matrix {
                 result[i][j] = A[i][j] - B[i][j];
         return new Matrix(result);
     }
+    /**
+     * Функция возвращает результат умножения 2 матриц
+     * @param matrix1 1 умножаемая матрица
+     * @param matrix2 2 умножаемая матрица
+     * @return  возвращает результат умножения 2 матриц
+     */
     public static Matrix multiply(Matrix matrix1, Matrix matrix2)
     {
         float[][] A = matrix1.matrix;
@@ -161,10 +228,18 @@ public class Matrix {
         }
         return  new Matrix(result);
     }
+    /**
+     * Функция возвращает матрицу {@link Matrix#matrix}
+     * @return  возвращает матрицу {@link Matrix#matrix}
+     */
     public float[][] getMatrix(){
         return  matrix;
     }
 
+    /**
+     * Функция возвращает преобразованную в строку матрицу {@link Matrix#matrix}
+     * @return возвращает преобразованную в строку матрицу {@link Matrix#matrix}
+     */
     @Override
     public String toString() {
         String result = "";
@@ -182,11 +257,10 @@ public class Matrix {
             for (int j = 0; j < columns; j++) {
                 result += matrix[i][j] + "   ";
                 int curLenght = String.valueOf(matrix[i][j]).length();
-                //if(j != columns - 1) {
-                    for (int k = 0; k < maxLength - curLenght; k++) {
-                        result += " ";
-                    }
-                //}
+                for (int k = 0; k < maxLength - curLenght; k++) {
+                    result += " ";
+                }
+
             }
             result += "|" +  System.lineSeparator();
         }

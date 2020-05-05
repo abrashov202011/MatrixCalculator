@@ -5,8 +5,13 @@ import com.codebind.Classes.Matrix;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
-
+/**
+ * Класс для вывода главной панели
+ * @autor Абрашов
+ * @version 1.0
+ */
 public class MainPanel extends JPanel {
+    /** Поле для вывода матрицы*/
     JPanel matrixPanel;
     /**
      * Конструктор - создание нового объекта
@@ -16,6 +21,9 @@ public class MainPanel extends JPanel {
         addMatrixPanel(new SingleMatrixPanel(3,3));
         addTopPanel();
     }
+    /**
+     * Функция для добавления верхней панели с выбором колисества матриц
+     */
     private void addTopPanel() {
         JPanel topPanel = new JPanel(new GridLayout());
         this.add(topPanel, BorderLayout.NORTH);
@@ -34,6 +42,9 @@ public class MainPanel extends JPanel {
         topPanel.add(oneMatrixButton);
         topPanel.add(twoMatrixButton);
     }
+    /**
+     * Функция для вывода панели с матрицами
+     */
     private void addMatrixPanel(JPanel panel) {
         if(matrixPanel != null)
             this.remove(matrixPanel);

@@ -7,16 +7,26 @@ import com.codebind.Main;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-
+/**
+ * Класс для вывода окна с 1 матрицей
+ * @autor Абрашов
+ * @version 1.0
+ */
 public class SingleMatrixPanel extends JPanel {
+    /** Поле для вывода нижней панели с кнопками*/
     JPanel bottomPanel;
+    /** Поле для вывода верхней панели для ввода размера матрицы*/
     JPanel topPanel;
+    /** Поле для вывода матрицы*/
     MatrixTable matrixTable;
+    /** Поле для вывода контейнера для матрицы*/
     ScrollPane scrollPane;
+    /** Поле для для хранения количества строк*/
     int rowsCount;
+    /** Поле для для хранения количества столбцов*/
     int columnCount;
     /**
-     * Конструктор - создание нового объекта
+     * Конструктор - создание нового объекта определенной размерности
      */
     public SingleMatrixPanel(int rows, int columns) {
         this.setLayout(new BorderLayout());
@@ -32,6 +42,9 @@ public class SingleMatrixPanel extends JPanel {
         addClearButton();
 
     }
+    /**
+     * Функция для добавления кнопки вычисления определителя матрицы
+     */
     private void addDetermimantButton() {
         JButton btn = new JButton("Определитель");
         btn.addActionListener(new ActionListener() {
@@ -54,6 +67,9 @@ public class SingleMatrixPanel extends JPanel {
         });
         bottomPanel.add(btn);
     }
+    /**
+     * Функция для добавления кнопки вычисления обратной матрицы
+     */
     private void addInverseButton() {
         JButton btn = new JButton("Обращение");
         btn.addActionListener(new ActionListener() {
@@ -76,6 +92,9 @@ public class SingleMatrixPanel extends JPanel {
         });
         bottomPanel.add(btn);
     }
+    /**
+     * Функция для добавления кнопки транспонирования матрицы
+     */
     private void addTransposeButton() {
         JButton btn = new JButton("Транспонирование");
         btn.addActionListener(new ActionListener() {
@@ -95,6 +114,9 @@ public class SingleMatrixPanel extends JPanel {
         });
         bottomPanel.add(btn);
     }
+    /**
+     * Функция для добавления кнопки вычисления определителя матрицы
+     */
     private void showMatrixResult(Matrix matrix, String title) {
         final JDialog frame = new JDialog((JFrame) SwingUtilities.getWindowAncestor(Main.mainPanel), title, true);
         frame.getContentPane().add(new ResultMatrixPanel(matrix));
@@ -102,6 +124,9 @@ public class SingleMatrixPanel extends JPanel {
         frame.pack();
         frame.setVisible(true);
     }
+    /**
+     * Функция для вывода результата операции
+     */
     private void addMatrixSizeFilds(int rows, int columns) {
         topPanel = new JPanel(new GridLayout());
         JTextField rowCount = new JTextField();
@@ -135,6 +160,9 @@ public class SingleMatrixPanel extends JPanel {
         });
         topPanel.add(btn);
     }
+    /**
+     * Функция для вывода верхней панели для ввода размера матрицы
+     */
     private void addMatrix(int rows, int columns, MatrixTable newMatrixTable){
         if(rows <= 0) {
             showWarning("Количество строк матрицы не меожет быть меньше или равно 0");
@@ -158,6 +186,9 @@ public class SingleMatrixPanel extends JPanel {
             this.repaint();
         }
     }
+    /**
+     * Функция для добавления кнопки очистки матрицы
+     */
     private void addClearButton() {
         JButton btn = new JButton("Очистить");
         btn.addActionListener(new ActionListener() {
@@ -167,6 +198,9 @@ public class SingleMatrixPanel extends JPanel {
         });
         bottomPanel.add(btn);
     }
+    /**
+     * Функция для добавления кнопки копирования матрицы
+     */
     private void addCopyButton() {
         JButton btn = new JButton("Копировать");
         btn.addActionListener(new ActionListener() {
@@ -182,6 +216,9 @@ public class SingleMatrixPanel extends JPanel {
         });
         bottomPanel.add(btn);
     }
+    /**
+     * Функция для добавления кнопки встарки сохраненной матрицы
+     */
     private void addPasteButton() {
         JButton btn = new JButton("Вставить");
         btn.addActionListener(new ActionListener() {
@@ -193,6 +230,9 @@ public class SingleMatrixPanel extends JPanel {
         });
         bottomPanel.add(btn);
     }
+    /**
+     * Функция для вывода сообщения пользователю
+     */
     private void showWarning(String message) {
         JOptionPane.showMessageDialog(null,message);
     }

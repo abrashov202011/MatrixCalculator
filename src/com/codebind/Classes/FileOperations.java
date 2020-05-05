@@ -7,8 +7,15 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
-
+/**
+ * Класс для работы с файлами
+ * @autor Абрашов
+ * @version 1.0
+ */
 public class FileOperations {
+    /**
+     * Функция записи в файл результатов результатов операции с 1 матрицей
+     */
     public static void writeOneMatrixOperationToFile(String operand1, String result, String operation) {
         try {
             File myObj = new File("log.txt");
@@ -40,6 +47,9 @@ public class FileOperations {
             e.printStackTrace();
         }
     }
+    /**
+     * Функция записи в файл результатов результатов операции с 2 матрицами
+     */
     public static void writeTwoMatrixOperationToFile(String operand1, String operand2, String result, String operation) {
         try {
             File myObj = new File("log.txt");

@@ -7,10 +7,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-
+/**
+ * Класс для вывода результатов в виде таблицы
+ * @autor Абрашов
+ * @version 1.0
+ */
 public class ResultMatrixPanel extends JPanel {
     /**
-     * Конструктор - создание нового объекта
+     * Конструктор - создание нового объекта с определенными значениями
+     * @param matrix матрица для вывода
      */
     public ResultMatrixPanel(Matrix matrix) {
         this.setLayout(new BorderLayout());
