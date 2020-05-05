@@ -19,13 +19,13 @@ public class SingleMatrixPanel extends JPanel {
      */
     public SingleMatrixPanel(int rows, int columns) {
         this.setLayout(new BorderLayout());
+        addMatrixSizeFilds(rows, columns);
         addMatrix(rows, columns);
         bottomPanel = new JPanel(new GridLayout());
         this.add(bottomPanel,BorderLayout.SOUTH);
         addDetermimantButton();
         addInverseButton();
         addTransposeButton();
-        addMatrixSizeFilds(rows, columns);
         addClearButton();
     }
     private void addDetermimantButton() {
@@ -128,7 +128,7 @@ public class SingleMatrixPanel extends JPanel {
         int columns = matrixTable.getTable().getColumnCount();
         btn.addActionListener(new ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent e) {
-                addMatrix(rows,columns);
+                addMatrix(rowsCount,columnCount);
             }
         });
         bottomPanel.add(btn);
