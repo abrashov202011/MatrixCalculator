@@ -26,7 +26,7 @@ public class MatrixTable {
 
     }
 
-    public MatrixTable(Matrix matrix) {
+    public MatrixTable(Matrix matrix, boolean setRowWidth) {
         int rows = matrix.getMatrix().length;
         int columns = matrix.getMatrix()[0].length;
 
@@ -44,6 +44,8 @@ public class MatrixTable {
         table = new JTable(data, columnNames);
         var columnModel = table.getColumnModel();
         for(int i = 0; i < columns; i++) {
+            if(setRowWidth)
+                columnModel.getColumn(i).setMaxWidth(40);
             DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
             centerRenderer.setHorizontalAlignment( JLabel.CENTER );
             columnModel.getColumn(i).setCellRenderer( centerRenderer );

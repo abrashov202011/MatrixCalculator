@@ -20,19 +20,23 @@ public class SingleMatrixPanel extends JPanel {
     public SingleMatrixPanel(int rows, int columns) {
         this.setLayout(new BorderLayout());
         addMatrixSizeFilds(rows, columns);
-        addMatrix(rows, columns);
+        addMatrix(rows, columns, null);
         bottomPanel = new JPanel(new GridLayout());
         this.add(bottomPanel,BorderLayout.SOUTH);
         addDetermimantButton();
         addInverseButton();
         addTransposeButton();
+        addCopyButton();
+        addPasteButton();
         addClearButton();
+
     }
     private void addDetermimantButton() {
         JButton btn = new JButton("Определитель");
         btn.addActionListener(new ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent e) {
-                matrixTable.getTable().getCellEditor().stopCellEditing();
+                if(matrixTable.getTable().getCellEditor() != null)
+                    matrixTable.getTable().getCellEditor().stopCellEditing();
                 if(rowsCount != columnCount) {
                     showWarning("Невозможно вычислить определитель у не квадратной матрицы");
                 } else {
@@ -52,7 +56,8 @@ public class SingleMatrixPanel extends JPanel {
         JButton btn = new JButton("Обращение");
         btn.addActionListener(new ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent e) {
-                matrixTable.getTable().getCellEditor().stopCellEditing();
+                if(matrixTable.getTable().getCellEditor() != null)
+                    matrixTable.getTable().getCellEditor().stopCellEditing();
                 if(rowsCount != columnCount) {
                     showWarning("Невозможно обратить не квадратную матрицу");
                 } else {
@@ -72,7 +77,8 @@ public class SingleMatrixPanel extends JPanel {
         JButton btn = new JButton("Транспонирование");
         btn.addActionListener(new ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent e) {
-                matrixTable.getTable().getCellEditor().stopCellEditing();
+                if(matrixTable.getTable().getCellEditor() != null)
+                    matrixTable.getTable().getCellEditor().stopCellEditing();
                 try {
                     Matrix matrix = new Matrix(matrixTable.getTable());
                     Matrix inverseMatrix = matrix.transpose();
@@ -120,12 +126,12 @@ public class SingleMatrixPanel extends JPanel {
                 catch (Exception ex) {
                     showWarning("Количество строк не является числом");
                 }
-                addMatrix(Integer.parseInt(rowCount.getText()),Integer.parseInt(columnCount.getText()));
+                addMatrix(Integer.parseInt(rowCount.getText()),Integer.parseInt(columnCount.getText()), null);
             }
         });
         topPanel.add(btn);
     }
-    private void addMatrix(int rows, int columns){
+    private void addMatrix(int rows, int columns, MatrixTable newMatrixTable){
         if(rows <= 0) {
             showWarning("Количество строк матрицы не меожет быть меньше или равно 0");
         }
@@ -137,7 +143,10 @@ public class SingleMatrixPanel extends JPanel {
                 this.remove(scrollPane);
             this.columnCount = columns;
             this.rowsCount = rows;
-            this.matrixTable = new MatrixTable(rows, columns);
+            if(newMatrixTable == null)
+                this.matrixTable = new MatrixTable(rows, columns);
+            else
+                this.matrixTable = newMatrixTable;
             this.scrollPane = new ScrollPane();
             this.add(this.scrollPane);
             this.scrollPane.add(matrixTable.getTable(), BorderLayout.CENTER);
@@ -147,11 +156,35 @@ public class SingleMatrixPanel extends JPanel {
     }
     private void addClearButton() {
         JButton btn = new JButton("Очистить");
-        int rows = matrixTable.getTable().getRowCount();
-        int columns = matrixTable.getTable().getColumnCount();
         btn.addActionListener(new ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent e) {
-                addMatrix(rowsCount,columnCount);
+                addMatrix(rowsCount,columnCount, null);
+            }
+        });
+        bottomPanel.add(btn);
+    }
+    private void addCopyButton() {
+        JButton btn = new JButton("Копировать");
+        btn.addActionListener(new ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                if(matrixTable.getTable().getCellEditor() != null)
+                    matrixTable.getTable().getCellEditor().stopCellEditing();
+                try {
+                    Main.SavedMatrix = new Matrix(matrixTable.getTable());
+                } catch (Error ex) {
+                    showWarning(ex.getMessage());
+                }
+            }
+        });
+        bottomPanel.add(btn);
+    }
+    private void addPasteButton() {
+        JButton btn = new JButton("Вставить");
+        btn.addActionListener(new ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                int rows = Main.SavedMatrix.getMatrix().length;
+                int columns = Main.SavedMatrix.getMatrix()[0].length;
+                addMatrix(rows,columns,new MatrixTable(Main.SavedMatrix, true));
             }
         });
         bottomPanel.add(btn);

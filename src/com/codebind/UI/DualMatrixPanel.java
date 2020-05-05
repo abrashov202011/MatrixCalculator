@@ -30,8 +30,10 @@ public class DualMatrixPanel extends JPanel {
         JButton btn = new JButton("Сложение");
         btn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                singleMatrixPanel1.matrixTable.getTable().getCellEditor().stopCellEditing();
-                singleMatrixPanel2.matrixTable.getTable().getCellEditor().stopCellEditing();
+                if(singleMatrixPanel1.matrixTable.getTable().getCellEditor() != null)
+                    singleMatrixPanel1.matrixTable.getTable().getCellEditor().stopCellEditing();
+                if(singleMatrixPanel2.matrixTable.getTable().getCellEditor() != null)
+                    singleMatrixPanel2.matrixTable.getTable().getCellEditor().stopCellEditing();
                 int rowsCount1 = singleMatrixPanel1.matrixTable.getTable().getRowCount();
                 int columnCount1 = singleMatrixPanel1.matrixTable.getTable().getColumnCount();
                 int rowsCount2 = singleMatrixPanel2.matrixTable.getTable().getRowCount();
@@ -56,8 +58,10 @@ public class DualMatrixPanel extends JPanel {
         JButton btn = new JButton("Вычитание");
         btn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                singleMatrixPanel1.matrixTable.getTable().getCellEditor().stopCellEditing();
-                singleMatrixPanel2.matrixTable.getTable().getCellEditor().stopCellEditing();
+                if(singleMatrixPanel1.matrixTable.getTable().getCellEditor() != null)
+                    singleMatrixPanel1.matrixTable.getTable().getCellEditor().stopCellEditing();
+                if(singleMatrixPanel2.matrixTable.getTable().getCellEditor() != null)
+                    singleMatrixPanel2.matrixTable.getTable().getCellEditor().stopCellEditing();
                 int rowsCount1 = singleMatrixPanel1.matrixTable.getTable().getRowCount();
                 int columnCount1 = singleMatrixPanel1.matrixTable.getTable().getColumnCount();
                 int rowsCount2 = singleMatrixPanel2.matrixTable.getTable().getRowCount();
@@ -82,8 +86,10 @@ public class DualMatrixPanel extends JPanel {
         JButton btn = new JButton("Умножение");
         btn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                singleMatrixPanel1.matrixTable.getTable().getCellEditor().stopCellEditing();
-                singleMatrixPanel2.matrixTable.getTable().getCellEditor().stopCellEditing();
+                if(singleMatrixPanel1.matrixTable.getTable().getCellEditor() != null)
+                    singleMatrixPanel1.matrixTable.getTable().getCellEditor().stopCellEditing();
+                if(singleMatrixPanel2.matrixTable.getTable().getCellEditor() != null)
+                    singleMatrixPanel2.matrixTable.getTable().getCellEditor().stopCellEditing();
                 int columnCount1 = singleMatrixPanel1.matrixTable.getTable().getColumnCount();
                 int rowsCount2 = singleMatrixPanel2.matrixTable.getTable().getRowCount();
                 if (columnCount1 != rowsCount2 ) {
