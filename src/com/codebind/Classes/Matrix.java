@@ -1,7 +1,6 @@
 package com.codebind.Classes;
 
 import javax.swing.*;
-import java.util.Arrays;
 /**
  * Класс для хранения матрицы
  * @autor Абрашов

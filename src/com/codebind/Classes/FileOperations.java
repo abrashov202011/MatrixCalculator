@@ -1,12 +1,10 @@
 package com.codebind.Classes;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Scanner;
 /**
  * Класс для работы с файлами
  * @autor Абрашов
@@ -25,23 +23,16 @@ public class FileOperations {
             myWriter.append(getCurrentDate());
             myWriter.append(System.lineSeparator());
             myWriter.append(System.lineSeparator());
-
             myWriter.append(operand1);
-
             myWriter.append(System.lineSeparator());
-
             myWriter.append(operation);
-
             myWriter.append(System.lineSeparator());
             myWriter.append(System.lineSeparator());
-
             myWriter.append(result);
             myWriter.append(System.lineSeparator());
             myWriter.append("***********************************************************************************************");
             myWriter.append(System.lineSeparator());
-
             myWriter.close();
-
         } catch (IOException e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
@@ -59,26 +50,20 @@ public class FileOperations {
             myWriter.append(getCurrentDate());
             myWriter.append(System.lineSeparator());
             myWriter.append(System.lineSeparator());
-
             myWriter.append(operand1);
             myWriter.append(System.lineSeparator());
-
             myWriter.append(operation);
-
             myWriter.append(System.lineSeparator());
             myWriter.append(System.lineSeparator());
-
             myWriter.append(operand2);
             myWriter.append(System.lineSeparator());
             myWriter.append("=");
             myWriter.append(System.lineSeparator());
             myWriter.append(System.lineSeparator());
-
             myWriter.append(result);
             myWriter.append(System.lineSeparator());
             myWriter.append("***********************************************************************************************");
             myWriter.append(System.lineSeparator());
-
             myWriter.close();
 
         } catch (IOException e) {
