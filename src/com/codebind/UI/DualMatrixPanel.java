@@ -1,5 +1,6 @@
 package com.codebind.UI;
 
+import com.codebind.Classes.FileOperations;
 import com.codebind.Classes.Matrix;
 import com.codebind.Main;
 
@@ -45,6 +46,7 @@ public class DualMatrixPanel extends JPanel {
                         Matrix matrix1 = new Matrix(singleMatrixPanel1.matrixTable.getTable());
                         Matrix matrix2 = new Matrix(singleMatrixPanel2.matrixTable.getTable());
                         Matrix matrixResult = Matrix.addition(matrix1, matrix2);
+                        FileOperations.writeTwoMatrixOperationToFile(matrix1.toString(),matrix2.toString(),matrixResult.toString(),"+");
                         showMatrixResult(matrixResult, "Результат сложения матриц");
                     } catch (Error ex) {
                         showWarning(ex.getMessage());
@@ -73,6 +75,7 @@ public class DualMatrixPanel extends JPanel {
                         Matrix matrix1 = new Matrix(singleMatrixPanel1.matrixTable.getTable());
                         Matrix matrix2 = new Matrix(singleMatrixPanel2.matrixTable.getTable());
                         Matrix matrixResult = Matrix.subtraction(matrix1, matrix2);
+                        FileOperations.writeTwoMatrixOperationToFile(matrix1.toString(),matrix2.toString(),matrixResult.toString(),"-");
                         showMatrixResult(matrixResult, "Результат вычитания матриц");
                     } catch (Error ex) {
                         showWarning(ex.getMessage());
@@ -99,6 +102,7 @@ public class DualMatrixPanel extends JPanel {
                         Matrix matrix1 = new Matrix(singleMatrixPanel1.matrixTable.getTable());
                         Matrix matrix2 = new Matrix(singleMatrixPanel2.matrixTable.getTable());
                         Matrix matrixResult = Matrix.multiply(matrix1, matrix2);
+                        FileOperations.writeTwoMatrixOperationToFile(matrix1.toString(),matrix2.toString(),matrixResult.toString(),"*");
                         showMatrixResult(matrixResult, "Результат умножения матриц");
                     } catch (Error ex) {
                         showWarning(ex.getMessage());

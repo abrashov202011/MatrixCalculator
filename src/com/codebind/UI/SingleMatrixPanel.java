@@ -1,5 +1,6 @@
 package com.codebind.UI;
 
+import com.codebind.Classes.FileOperations;
 import com.codebind.Classes.Matrix;
 import com.codebind.Main;
 
@@ -43,6 +44,7 @@ public class SingleMatrixPanel extends JPanel {
                     try {
                         Matrix matrix = new Matrix(matrixTable.getTable());
                         float determinant = matrix.getDeterminant();
+                        FileOperations.writeOneMatrixOperationToFile(matrix.toString(), String.valueOf(determinant) + System.lineSeparator(), "DET");
                         JOptionPane.showMessageDialog(null, "Определитель равен " + determinant);
                     } catch (Error ex) {
                         showWarning(ex.getMessage());
@@ -64,7 +66,8 @@ public class SingleMatrixPanel extends JPanel {
                     try {
                         Matrix matrix = new Matrix(matrixTable.getTable());
                         Matrix inverseMatrix = matrix.inverse();
-                        showMatrixResult(matrix.inverse(), "Обращенная матрица");
+                        FileOperations.writeOneMatrixOperationToFile(matrix.toString(), inverseMatrix.toString(), "^-1");
+                        showMatrixResult(inverseMatrix, "Обращенная матрица");
                     } catch (Error ex) {
                         showWarning(ex.getMessage());
                     }
@@ -82,7 +85,8 @@ public class SingleMatrixPanel extends JPanel {
                 try {
                     Matrix matrix = new Matrix(matrixTable.getTable());
                     Matrix inverseMatrix = matrix.transpose();
-                    showMatrixResult(matrix.transpose(), "Транспонированна матрица");
+                    FileOperations.writeOneMatrixOperationToFile(matrix.toString(), inverseMatrix.toString(), "T");
+                    showMatrixResult(inverseMatrix, "Транспонированна матрица");
                 }
                 catch (Error ex) {
                     showWarning(ex.getMessage());

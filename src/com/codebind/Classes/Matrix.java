@@ -1,6 +1,7 @@
 package com.codebind.Classes;
 
 import javax.swing.*;
+import java.util.Arrays;
 
 public class Matrix {
     float[][] matrix;
@@ -109,8 +110,8 @@ public class Matrix {
         int columns = matrix.length;
         int rows = matrix[0].length;
         float[][] result = new float[rows][columns];
-        for (int i = 0; i < columns; i++) {
-            for (int j = 0; j < rows; j++) {
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
                 result[i][j] = matrix[j][i];
             }
         }
@@ -164,4 +165,31 @@ public class Matrix {
         return  matrix;
     }
 
+    @Override
+    public String toString() {
+        String result = "";
+        int rows = matrix.length;
+        int columns = matrix[0].length;
+        int maxLength = 0;
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                int curLenght = String.valueOf(matrix[i][j]).length();
+                maxLength = maxLength > curLenght ? maxLength : curLenght;
+            }
+        }
+        for (int i = 0; i < rows; i++) {
+            result += "| ";
+            for (int j = 0; j < columns; j++) {
+                result += matrix[i][j] + "   ";
+                int curLenght = String.valueOf(matrix[i][j]).length();
+                //if(j != columns - 1) {
+                    for (int k = 0; k < maxLength - curLenght; k++) {
+                        result += " ";
+                    }
+                //}
+            }
+            result += "|" +  System.lineSeparator();
+        }
+        return  result;
+    }
 }
