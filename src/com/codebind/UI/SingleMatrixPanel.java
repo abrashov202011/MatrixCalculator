@@ -32,6 +32,7 @@ public class SingleMatrixPanel extends JPanel {
         JButton btn = new JButton("Определитель");
         btn.addActionListener(new ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent e) {
+                matrixTable.getTable().getCellEditor().stopCellEditing();
                 if(rowsCount != columnCount) {
                     showWarning("Невозможно вычислить определитель у не квадратной матрицы");
                 } else {
@@ -51,6 +52,7 @@ public class SingleMatrixPanel extends JPanel {
         JButton btn = new JButton("Обращение");
         btn.addActionListener(new ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent e) {
+                matrixTable.getTable().getCellEditor().stopCellEditing();
                 if(rowsCount != columnCount) {
                     showWarning("Невозможно обратить не квадратную матрицу");
                 } else {
@@ -70,6 +72,7 @@ public class SingleMatrixPanel extends JPanel {
         JButton btn = new JButton("Транспонирование");
         btn.addActionListener(new ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent e) {
+                matrixTable.getTable().getCellEditor().stopCellEditing();
                 try {
                     Matrix matrix = new Matrix(matrixTable.getTable());
                     Matrix inverseMatrix = matrix.transpose();

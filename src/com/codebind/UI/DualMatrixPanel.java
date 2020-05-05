@@ -30,16 +30,18 @@ public class DualMatrixPanel extends JPanel {
         JButton btn = new JButton("Сложение");
         btn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                Matrix matrix1 = new Matrix(singleMatrixPanel1.matrixTable.getTable());
-                Matrix matrix2 = new Matrix(singleMatrixPanel2.matrixTable.getTable());
-                int rowsCount1 = matrix1.getMatrix().length;
-                int columnCount1 = matrix1.getMatrix()[0].length;
-                int rowsCount2 = matrix2.getMatrix().length;
-                int columnCount2 = matrix2.getMatrix()[0].length;
+                singleMatrixPanel1.matrixTable.getTable().getCellEditor().stopCellEditing();
+                singleMatrixPanel2.matrixTable.getTable().getCellEditor().stopCellEditing();
+                int rowsCount1 = singleMatrixPanel1.matrixTable.getTable().getRowCount();
+                int columnCount1 = singleMatrixPanel1.matrixTable.getTable().getColumnCount();
+                int rowsCount2 = singleMatrixPanel2.matrixTable.getTable().getRowCount();
+                int columnCount2 = singleMatrixPanel2.matrixTable.getTable().getColumnCount();
                 if (rowsCount1 != rowsCount2 || columnCount1 != columnCount2) {
                     showWarning("Невозможно сложить матрицы разной рамерности");
                 } else {
                     try {
+                        Matrix matrix1 = new Matrix(singleMatrixPanel1.matrixTable.getTable());
+                        Matrix matrix2 = new Matrix(singleMatrixPanel2.matrixTable.getTable());
                         Matrix matrixResult = Matrix.addition(matrix1, matrix2);
                         showMatrixResult(matrixResult, "Результат сложения матриц");
                     } catch (Error ex) {
@@ -54,16 +56,18 @@ public class DualMatrixPanel extends JPanel {
         JButton btn = new JButton("Вычитание");
         btn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                Matrix matrix1 = new Matrix(singleMatrixPanel1.matrixTable.getTable());
-                Matrix matrix2 = new Matrix(singleMatrixPanel2.matrixTable.getTable());
-                int rowsCount1 = matrix1.getMatrix().length;
-                int columnCount1 = matrix1.getMatrix()[0].length;
-                int rowsCount2 = matrix2.getMatrix().length;
-                int columnCount2 = matrix2.getMatrix()[0].length;
+                singleMatrixPanel1.matrixTable.getTable().getCellEditor().stopCellEditing();
+                singleMatrixPanel2.matrixTable.getTable().getCellEditor().stopCellEditing();
+                int rowsCount1 = singleMatrixPanel1.matrixTable.getTable().getRowCount();
+                int columnCount1 = singleMatrixPanel1.matrixTable.getTable().getColumnCount();
+                int rowsCount2 = singleMatrixPanel2.matrixTable.getTable().getRowCount();
+                int columnCount2 = singleMatrixPanel2.matrixTable.getTable().getColumnCount();
                 if (rowsCount1 != rowsCount2 || columnCount1 != columnCount2) {
                     showWarning("Невозможно вычислить разность матриц разной рамерности");
                 } else {
                     try {
+                        Matrix matrix1 = new Matrix(singleMatrixPanel1.matrixTable.getTable());
+                        Matrix matrix2 = new Matrix(singleMatrixPanel2.matrixTable.getTable());
                         Matrix matrixResult = Matrix.subtraction(matrix1, matrix2);
                         showMatrixResult(matrixResult, "Результат вычитания матриц");
                     } catch (Error ex) {
@@ -78,16 +82,16 @@ public class DualMatrixPanel extends JPanel {
         JButton btn = new JButton("Умножение");
         btn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                Matrix matrix1 = new Matrix(singleMatrixPanel1.matrixTable.getTable());
-                Matrix matrix2 = new Matrix(singleMatrixPanel2.matrixTable.getTable());
-                int rowsCount1 = matrix1.getMatrix().length;
-                int columnCount1 = matrix1.getMatrix()[0].length;
-                int rowsCount2 = matrix2.getMatrix().length;
-                int columnCount2 = matrix2.getMatrix()[0].length;
+                singleMatrixPanel1.matrixTable.getTable().getCellEditor().stopCellEditing();
+                singleMatrixPanel2.matrixTable.getTable().getCellEditor().stopCellEditing();
+                int columnCount1 = singleMatrixPanel1.matrixTable.getTable().getColumnCount();
+                int rowsCount2 = singleMatrixPanel2.matrixTable.getTable().getRowCount();
                 if (columnCount1 != rowsCount2 ) {
                     showWarning("Число столбцов матрицы 1 должно быть равно числу строк матрицы 2");
                 } else {
                     try {
+                        Matrix matrix1 = new Matrix(singleMatrixPanel1.matrixTable.getTable());
+                        Matrix matrix2 = new Matrix(singleMatrixPanel2.matrixTable.getTable());
                         Matrix matrixResult = Matrix.multiply(matrix1, matrix2);
                         showMatrixResult(matrixResult, "Результат умножения матриц");
                     } catch (Error ex) {
