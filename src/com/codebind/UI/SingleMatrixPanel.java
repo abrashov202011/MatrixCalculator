@@ -24,7 +24,11 @@ public class SingleMatrixPanel extends JPanel {
     /** Поле для для хранения количества строк*/
     int rowsCount;
     /** Поле для для хранения количества столбцов*/
-    int columnCount;
+    int columnsCount;
+    /** Поле для для вывода поял ввода количества столбцов*/
+    JTextField rowsCountTextField;
+    /** Поле для для вывода поял ввода количества строк*/
+    JTextField columnsCountTextField;
     /**
      * Конструктор - создание нового объекта определенной размерности
      */
@@ -32,7 +36,7 @@ public class SingleMatrixPanel extends JPanel {
         this.setLayout(new BorderLayout());
         addMatrixSizeFilds(rows, columns);
         addMatrix(rows, columns, null);
-        bottomPanel = new JPanel(new GridLayout());
+        bottomPanel = new JPanel(new GridLayout(2,3));
         this.add(bottomPanel,BorderLayout.SOUTH);
         addDetermimantButton();
         addInverseButton();
@@ -51,7 +55,7 @@ public class SingleMatrixPanel extends JPanel {
             public void actionPerformed(java.awt.event.ActionEvent e) {
                 if(matrixTable.getTable().getCellEditor() != null)
                     matrixTable.getTable().getCellEditor().stopCellEditing();
-                if(rowsCount != columnCount) {
+                if(rowsCount != columnsCount) {
                     showWarning("Невозможно вычислить определитель у не квадратной матрицы");
                 } else {
                     try {
@@ -76,7 +80,7 @@ public class SingleMatrixPanel extends JPanel {
             public void actionPerformed(java.awt.event.ActionEvent e) {
                 if(matrixTable.getTable().getCellEditor() != null)
                     matrixTable.getTable().getCellEditor().stopCellEditing();
-                if(rowsCount != columnCount) {
+                if(rowsCount != columnsCount) {
                     showWarning("Невозможно обратить не квадратную матрицу");
                 } else {
                     try {
@@ -129,33 +133,33 @@ public class SingleMatrixPanel extends JPanel {
      */
     private void addMatrixSizeFilds(int rows, int columns) {
         topPanel = new JPanel(new GridLayout());
-        JTextField rowCount = new JTextField();
-        rowCount.setText(String.valueOf(rows));
-        JLabel rowLabel = new JLabel("Количество строк");
-        JTextField columnCount = new JTextField(columns);
-        columnCount.setText(String.valueOf(columns));
-        JLabel columnLabel = new JLabel("Количество столбцов");
+        rowsCountTextField = new JTextField();
+        rowsCountTextField.setText(String.valueOf(rows));
+        JLabel rowLabel = new JLabel("Строк");
+        columnsCountTextField = new JTextField(columns);
+        columnsCountTextField.setText(String.valueOf(columns));
+        JLabel columnLabel = new JLabel("Столбцов");
         topPanel.add(rowLabel);
-        topPanel.add(rowCount);
+        topPanel.add(rowsCountTextField);
         topPanel.add(columnLabel);
-        topPanel.add(columnCount);
+        topPanel.add(columnsCountTextField);
         this.add(topPanel, BorderLayout.NORTH);
         JButton btn = new JButton("Применить");
         btn.addActionListener(new ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent e) {
                 try {
-                    Integer.parseInt(columnCount.getText());
+                    Integer.parseInt(columnsCountTextField.getText());
                 }
                 catch (Exception ex) {
                     showWarning("Количество столбцов не является числом");
                 }
                 try {
-                    Integer.parseInt(rowCount.getText());
+                    Integer.parseInt(rowsCountTextField.getText());
                 }
                 catch (Exception ex) {
                     showWarning("Количество строк не является числом");
                 }
-                addMatrix(Integer.parseInt(rowCount.getText()),Integer.parseInt(columnCount.getText()), null);
+                addMatrix(Integer.parseInt(rowsCountTextField.getText()),Integer.parseInt(columnsCountTextField.getText()), null);
             }
         });
         topPanel.add(btn);
@@ -173,7 +177,7 @@ public class SingleMatrixPanel extends JPanel {
         else {
             if(scrollPane != null)
                 this.remove(scrollPane);
-            this.columnCount = columns;
+            this.columnsCount = columns;
             this.rowsCount = rows;
             if(newMatrixTable == null)
                 this.matrixTable = new MatrixTable(rows, columns);
@@ -193,7 +197,7 @@ public class SingleMatrixPanel extends JPanel {
         JButton btn = new JButton("Очистить");
         btn.addActionListener(new ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent e) {
-                addMatrix(rowsCount,columnCount, null);
+                addMatrix(rowsCount, columnsCount, null);
             }
         });
         bottomPanel.add(btn);
@@ -217,7 +221,7 @@ public class SingleMatrixPanel extends JPanel {
         bottomPanel.add(btn);
     }
     /**
-     * Функция для добавления кнопки встарки сохраненной матрицы
+     * Функция для добавления кнопки вставки сохраненной матрицы
      */
     private void addPasteButton() {
         JButton btn = new JButton("Вставить");
@@ -226,6 +230,8 @@ public class SingleMatrixPanel extends JPanel {
                 int rows = Main.SavedMatrix.getMatrix().length;
                 int columns = Main.SavedMatrix.getMatrix()[0].length;
                 addMatrix(rows,columns,new MatrixTable(Main.SavedMatrix, true));
+                rowsCountTextField.setText(String.valueOf(rows));
+                columnsCountTextField.setText(String.valueOf(columns));
             }
         });
         bottomPanel.add(btn);

@@ -23,7 +23,7 @@ public class ResultMatrixPanel extends JPanel {
         JTable table = new MatrixTable(matrix, false).getTable();
         scrollPane.add(table);
         scrollPane.setMaximumSize(new Dimension(1000,500));
-        scrollPane.setSize(new Dimension(100 * table.getRowCount() ,55 * table.getColumnCount()));
+        scrollPane.setSize(new Dimension(100 *  table.getColumnCount(),50 * table.getRowCount()));
         this.add(scrollPane, BorderLayout.CENTER);
         JButton copyButton = new JButton("Копировать");
         copyButton.addActionListener(new ActionListener() {
