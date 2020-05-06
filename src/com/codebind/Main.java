@@ -5,6 +5,8 @@ import com.codebind.UI.MainPanel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Locale;
+
 /**
  * Основной класс приложения
  * @autor Абрашов
@@ -19,6 +21,7 @@ public class Main {
      * Функция создающая интерфейс приложения
      */
     public static void main(String[] args) {
+        Locale.setDefault(Locale.US);
         JFrame frame = new JFrame();
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

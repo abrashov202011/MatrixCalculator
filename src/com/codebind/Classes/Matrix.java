@@ -34,7 +34,7 @@ public class Matrix {
         matrix = new float[rows][columns];
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
-                String value = (String)table.getValueAt(i,j);
+                String value = ((String)table.getValueAt(i,j)).replace(",",".");
                 if(value == null || value.isEmpty()) {
                     throw new Error(String.format("Элемент в строке %d и стобце %d не заполнен", i + 1, j + 1));
                 }
