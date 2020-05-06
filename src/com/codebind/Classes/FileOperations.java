@@ -1,10 +1,14 @@
 package com.codebind.Classes;
 
+import javax.swing.*;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Scanner;
+
 /**
  * Класс для работы с файлами
  * @autor Абрашов
@@ -67,9 +71,27 @@ public class FileOperations {
             myWriter.close();
 
         } catch (IOException e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null,e.getMessage());
         }
+    }
+    /**
+     * Функция возвращает лог вычислений из файла
+     * @return возвращает лог вычислений из файла
+     */
+    public static  String readResultFromFile() {
+        String result = "";
+        try {
+            File myObj = new File("log.txt");
+            Scanner myReader = new Scanner(myObj);
+            while (myReader.hasNextLine()) {
+                String data = myReader.nextLine();
+                result += data + System.lineSeparator();
+            }
+            myReader.close();
+        } catch (FileNotFoundException e) {
+            JOptionPane.showMessageDialog(null,e.getMessage());
+        }
+        return result;
     }
 
     /**

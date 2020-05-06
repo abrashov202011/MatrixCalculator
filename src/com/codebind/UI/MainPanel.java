@@ -1,6 +1,7 @@
 package com.codebind.UI;
 
 import com.codebind.Classes.Matrix;
+import com.codebind.Main;
 
 import javax.swing.*;
 import java.awt.*;
@@ -39,8 +40,19 @@ public class MainPanel extends JPanel {
                 addMatrixPanel(new DualMatrixPanel(3,3, 3, 3));
             }
         });
+        JButton showLogButton = new JButton("Показать лог");
+        showLogButton.addActionListener(new ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                final JDialog frame = new JDialog((JFrame) SwingUtilities.getWindowAncestor(Main.mainPanel), "Лог вычислений", true);
+                frame.getContentPane().add(new LogPanel());
+                frame.setMinimumSize(new Dimension(550,600));
+                frame.pack();
+                frame.setVisible(true);
+            }
+        });
         topPanel.add(oneMatrixButton);
         topPanel.add(twoMatrixButton);
+        topPanel.add(showLogButton);
     }
     /**
      * Функция для вывода панели с матрицами
